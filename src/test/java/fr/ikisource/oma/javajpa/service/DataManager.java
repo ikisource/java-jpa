@@ -31,6 +31,11 @@ public class DataManager {
         countryRepository.deleteAll();
     }
 
+    public Author createAuthor() {
+        Author author = new Author(new Country("name1"), "name1");
+        return authorRepository.save(author);
+    }
+
     public Author createAuthor(Country country) {
         Author author = new Author(country, "name1");
         return authorRepository.save(author);

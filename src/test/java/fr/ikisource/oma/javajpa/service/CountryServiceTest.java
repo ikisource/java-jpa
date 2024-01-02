@@ -34,6 +34,63 @@ public class CountryServiceTest {
     }
 
     @Test
+    public void get() {
+
+        Author author = dm.createAuthor();
+
+        Country entity = countryService.get(author.getCountry().getName());
+        Assertions.assertNotNull(entity);
+    }
+
+    @Test
+    public void getWithAuthorsUsingGetter() {
+
+        Author author = dm.createAuthor();
+        Country entity = countryService.getWithAuthorsUsingGetter(author.getCountry().getName());
+
+        Assertions.assertEquals(1, entity.getAuthors().size());
+        Assertions.assertNotNull(entity);
+    }
+
+    @Test
+    public void getWithAuthorsUsingHibernateInitialize() {
+
+        Author author = dm.createAuthor();
+        Country entity = countryService.getWithAuthorsUsingHibernateInitialize(author.getCountry().getName());
+
+        Assertions.assertEquals(1, entity.getAuthors().size());
+        Assertions.assertNotNull(entity);
+    }
+
+    @Test
+    public void getWithAuthorsUsingNamedEntityGraph() {
+
+        Author author = dm.createAuthor();
+        Country entity = countryService.getWithAuthorsUsingNamedEntityGraph(author.getCountry().getName());
+
+        Assertions.assertEquals(1, entity.getAuthors().size());
+        Assertions.assertNotNull(entity);
+    }
+
+    @Test
+    public void getWithAuthorsUsingEntityGraphProgrammatically() {
+
+        Author author = dm.createAuthor();
+        Country entity = countryService.getWithAuthorsUsingEntityGraphProgrammatically(author.getCountry().getName());
+
+        Assertions.assertEquals(1, entity.getAuthors().size());
+        Assertions.assertNotNull(entity);
+    }
+
+    @Test
+    public void get_null() {
+
+        Assertions.assertThrows(Exception.class, () -> {
+            countryService.get(null);
+        });
+    }
+
+    @Test
     public void delete() {
 
         Country country = dm.createCountry();
